@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 public class MenuActivity extends AppCompatActivity {
 
     @Override
@@ -24,8 +27,18 @@ public class MenuActivity extends AppCompatActivity {
             }
 
         });
-
-
-
     }
+
+//    protected void writeToFile(){
+//        try {
+//            final String TESTSTRING = new String(getString(R.string.TEST));
+//
+//
+//            FileOutputStream fOut = openFileOutput("samplefile.txt", MODE_PRIVATE);
+//
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
