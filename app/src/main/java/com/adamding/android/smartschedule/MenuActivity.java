@@ -36,6 +36,7 @@ public class MenuActivity extends AppCompatActivity {
 
         //initializing variables
         subButton =(Button) findViewById(R.id.subButton);
+        backButton = (Button) findViewById(R.id.addButton);
         //subText = (TextView) findViewById(R.id.subText);
         eventIn = (EditText) findViewById(R.id.editTextEvent);
         dateIn = (EditText) findViewById(R.id.editTextDate);

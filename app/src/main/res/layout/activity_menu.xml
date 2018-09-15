@@ -62,16 +62,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp" />
 
-    <Button
-        android:id="@+id/submit"
-        android:text="submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 
     <EditText
@@ -94,10 +84,6 @@
         android:id="@+id/editTextTime"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-<<<<<<< HEAD
-        android:layout_marginTop="25dp" />
-</RelativeLayout>
-=======
+
         android:layout_marginTop="300dp" />
 </RelativeLayout>
->>>>>>> eca2ce5805b744f880f7f25246f934bf5da75672

@@ -94,7 +94,7 @@ public class dbHelper extends SQLiteOpenHelper {
         List<Book> books = new LinkedList<Book>();
 
         //1. build the query
-        String query = "SELECT * FROM"+TABLE_NAME;
+        String query = "SELECT * FROM "+TABLE_NAME;
 
         //.2 get reference to writable db
         SQLiteDatabase db = this.getWritableDatabase();
@@ -109,5 +109,6 @@ public class dbHelper extends SQLiteOpenHelper {
                 books.add(book);
             }while(c.moveToNext());
         }
+        return null;
     }
 }
