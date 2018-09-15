@@ -3,4 +3,8 @@
     <string name="Submit">Submit</string>
     <string name="Event">Event</string>
     <string name="Add">Add event</string>
+    <string name="Back">Back</string>
+    <string name="View">View calender</string>
+    <string name="welcome">Welcome!</string>
+    <string name="event">Event</string>
 </resources>
