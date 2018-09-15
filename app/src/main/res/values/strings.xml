@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SmartSchedule</string>
+    <string name="Submit">Submit</string>
+    <string name="Event">Event</string>
 </resources>
