@@ -8,27 +8,59 @@
     tools:context=".MenuActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/subButton"
         android:layout_width="186dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="87dp"
+        android:layout_marginBottom="200dp"
         android:background="@android:color/darker_gray"
         android:text="@string/Submit"
-        tools:layout_editor_absoluteX="106dp"
-        tools:layout_editor_absoluteY="109dp" />
+    />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="125dp"
+        android:background="@android:color/darker_gray"
+        android:text="@string/Back"
+        />
+
+   <!-- <Button
+        android:id="@+id/viewButton"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:background="@android:color/darker_gray"
+        android:onClick="switchToCal"
+        android:text="@string/View"
+        /> -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        android:layout_centerHorizontal="true"
+        android:ems="12"
+        android:id="@+id/subText"
+        />
+
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textNoSuggestions"
-        android:hint="Event"
+        android:hint="@string/event"
         android:ems="10"
         android:id="@+id/editTextEvent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="100dp" />
 
     <Button
         android:id="@+id/submit"
@@ -45,22 +77,27 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textNoSuggestions"
-        android:hint="Date"
+        android:inputType="date"
+        android:hint="Date (mmddyyyy)"
         android:ems="10"
         android:id="@+id/editTextDate"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="200dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textNoSuggestions"
-        android:hint="Time"
+        android:inputType="time"
+        android:hint="Time (hhmm 24h format)"
         android:ems="10"
         android:id="@+id/editTextTime"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+<<<<<<< HEAD
         android:layout_marginTop="25dp" />
 </RelativeLayout>
+=======
+        android:layout_marginTop="300dp" />
+</RelativeLayout>
+>>>>>>> eca2ce5805b744f880f7f25246f934bf5da75672
