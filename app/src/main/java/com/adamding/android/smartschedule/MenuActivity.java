@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.adamding.android.smartschedule.database.Event;
+import com.adamding.android.smartschedule.database.dbHelper;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -43,6 +46,7 @@ public class MenuActivity extends AppCompatActivity {
         timeIn = (EditText) findViewById(R.id.editTextTime);
 
         //
+        final dbHelper db = new dbHelper(this);
         subButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                // subText.setText("Submitted! Go on with your day");
@@ -51,6 +55,7 @@ public class MenuActivity extends AppCompatActivity {
                 String event = eventIn.getText().toString();
                 int date = Integer.valueOf(dateIn.getText().toString());
                 int time = Integer.valueOf(timeIn.getText().toString());
+                db.addEvent(new Event(1, date, time, event));
             }
         });
 

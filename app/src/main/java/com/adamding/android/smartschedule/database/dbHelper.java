@@ -8,22 +8,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.sql.SQLInput;
 import java.util.LinkedList;
 import java.util.List;
 
 public class dbHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 1;
-    private static final String DB_NAME = "BookDB";
+    private static final int DB_VERSION = 2;
+    private static final String DB_NAME = "eventDB";
 
     //table name
-    private static final String TABLE_NAME = "books";
+    private static final String TABLE_NAME = "events";
 
-    private static final String KEY_ID = "id";
-    private static final String KEY_AUTHOR = "author";
-    private static final String KEY_TITLES = "titles";
+    private static final String ID = "id";
+    private static final String SECTION = "section";
+    private static final String DATE = "date";
+    private static final String TIME = "time";
+    private static final String EVENT = "event";
 
-    private static final String[] COLUMNS = {KEY_ID, KEY_TITLES, KEY_AUTHOR};
+    private static final String[] COLUMNS = {ID, SECTION, DATE, TIME, EVENT};
 
     public dbHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -31,84 +34,108 @@ public class dbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CR_BOOK_TBL = "CREATE TABLE books ("+
-                "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "title TEXT,"+
-                "author TEXT)";
+        //create table
+        String CR_TBL = "CREATE TABLE events ( "+
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                "section INT, "+
+                "date INT, "+
+                "time INT, "+
+                "event TEXT)";
 
-        db.execSQL(CR_BOOK_TBL);
-
-
+        db.execSQL(CR_TBL);
+        Log.d("DB", db.toString());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS books");
+        db.execSQL("DROP TABLE IF EXISTS events");
 
         this.onCreate(db);
     }
 
-    public Book defineBook(Cursor c){
-        Book book = new Book();
-        book.setId(Integer.parseInt(c.getString(0)));
-        book.setTitle(c.getString(1));
-        book.setAuthor(c.getString(2));
-        return book;
-    }
+    public void addEvent(Event e){
+        Log.d("addEvent", e.toString());
 
-    public void addBook(Book book){
-        //for logging
-        Log.d("addbook", book.toString());
-
-        //1. get reference to writable database
         SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues v = new ContentValues();
+        v.put(SECTION, e.getSection());
+        v.put(DATE, e.getDate());
+        v.put(TIME, e.getTime());
+        v.put(EVENT, e.getEvent());
 
-        //2. create content values
-        ContentValues values = new ContentValues();
-        values.put(KEY_TITLES, book.getTitle());
-        values.put(KEY_AUTHOR, book.getAuthor());
+        db.insert(TABLE_NAME, null, v);
 
-        //3. insert
-        db.insert(TABLE_NAME, null, values);
         db.close();
     }
 
-    public Book getBook(int id){
-        //1. get reference to readable db
+    public Event setUpBlankE(Cursor c){
+        Event e = new Event();
+        e.setID(Integer.parseInt(c.getString(0)));
+        e.setSection(Integer.parseInt(c.getString(1)));
+        e.setDate(Integer.parseInt(c.getString(2)));
+        e.setTime(Integer.parseInt(c.getString(3)));
+        e.setEvent(c.getString(4));
+        return e;
+    }
+    public void createEventContent(Event e, ContentValues v){
+        v.put(SECTION, e.getSection());
+        v.put(DATE, e.getDate());
+        v.put(TIME, e.getTime());
+        v.put(EVENT, e.getEvent());
+
+    }
+
+    public Event getEvent(int id){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        //2. build query
-        Cursor c = db.query(TABLE_NAME, COLUMNS, " id = ?", new String[] {String.valueOf(id)}, null, null, null, null);
+        Cursor c = db.query(TABLE_NAME, COLUMNS, " id=? ", new String[]{String.valueOf(id)}, null, null, null, null);
         if(c!=null){
             c.moveToFirst();
         }
-        Book book = new Book();
-        book.setId(Integer.parseInt(c.getString(0)));
-        book.setTitle(c.getString(1));
-        book.setAuthor(c.getString(2));
-        Log.d("getbook("+id+")",book.toString());
-        return book;
+        Event e = setUpBlankE(c);
+
+
+        Log.d("getEvent ", e.toString());
+
+        return e;
     }
 
-    public List<Book> getAllBooks(){
-        List<Book> books = new LinkedList<Book>();
+    public List<Event> getAllEvents(){
+        List<Event> events = new LinkedList<Event>();
 
-        //1. build the query
         String query = "SELECT * FROM "+TABLE_NAME;
-
-        //.2 get reference to writable db
         SQLiteDatabase db = this.getWritableDatabase();
-
         Cursor c = db.rawQuery(query, null);
 
-        Book book = null;
-
+        Event e = null;
         if(c.moveToFirst()){
             do{
-                book = defineBook(c);
-                books.add(book);
+                e = setUpBlankE(c);
+                events.add(e);
             }while(c.moveToNext());
         }
-        return null;
+        Log.d("getAllBooks ", events.toString());
+        return events;
     }
+
+    public int updateEvent(Event e){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        createEventContent(e, values);
+        int i = db.update(TABLE_NAME, values, ID+" = ?", new String[]{String.valueOf(e.getID())});
+        db.close();
+        return i;
+    }
+
+    public void deleteEvent(Event e){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_NAME, ID+" = ?", new String[] {String.valueOf(e.getID())});
+        db.close();
+        Log.d("deleteEvent", e.toString());
+    }
+
+
+
+
 }
