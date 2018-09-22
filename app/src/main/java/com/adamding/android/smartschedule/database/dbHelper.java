@@ -15,7 +15,7 @@ import java.util.List;
 public class dbHelper extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 2;
-    private static final String DB_NAME = "eventDB";
+    private static final String DB_NAME = "eventDB.db";
 
     //table name
     private static final String TABLE_NAME = "events";
@@ -64,6 +64,9 @@ public class dbHelper extends SQLiteOpenHelper {
         v.put(EVENT, e.getEvent());
 
         db.insert(TABLE_NAME, null, v);
+//        Log.d("Path for DB", db.getPath());
+//        DataManager.save();
+
 
         db.close();
     }
@@ -114,7 +117,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 events.add(e);
             }while(c.moveToNext());
         }
-        Log.d("getAllBooks ", events.toString());
+        Log.d("get all events ", events.toString());
         return events;
     }
 
@@ -131,8 +134,18 @@ public class dbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TABLE_NAME, ID+" = ?", new String[] {String.valueOf(e.getID())});
+
         db.close();
         Log.d("deleteEvent", e.toString());
+    }
+
+    public void deleteTable(){
+        Log.d("App started", "ewere");
+        this.getWritableDatabase().execSQL("DROP TABLE IF EXISTS 'eventDB.events'");
+
+
+
+        Log.d("Deleted Table", this.getWritableDatabase().getPath());
     }
 
 
