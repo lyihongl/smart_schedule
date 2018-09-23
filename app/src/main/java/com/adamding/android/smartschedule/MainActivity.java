@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         final Intent calView = new Intent(this, ViewActivity.class);
+        final Intent startClient = new Intent(this, StartClient.class);
+        final Intent startServer = new Intent(this, StartServer.class);
         viewCal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

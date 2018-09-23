@@ -37,5 +37,8 @@ public class DataManager {
 //        context.deleteDatabase("eventsDB.db");
 //        Log.d("ALL ",""+dbList.get(0).getAllEvents());
     }
+    public SQLiteDatabase getFile(){
+        return dbH.getWritableDatabase();
+    }
 
 }
