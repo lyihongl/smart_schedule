@@ -11,6 +11,7 @@ public class Server{
         try {
             serverSocket = new ServerSocket(port);
         }catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Could not listen on port: "+port);
             System.exit(1);
         }
